@@ -1,0 +1,19 @@
+spring.cloud.stream:
+  binders:
+    rabbit:
+      type: rabbit
+      environment:
+        spring:
+          rabbitmq:
+            host: localhost
+            port: 5672
+            username: guest
+            password: guest
+            virtual-host: /
+  bindings:
+    input:
+      destination: input-exchange
+      binder: rabbit
+    output:
+      destination: output-exchange
+      binder: rabbit
