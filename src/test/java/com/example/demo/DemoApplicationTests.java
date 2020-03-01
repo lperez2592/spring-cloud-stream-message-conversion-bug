@@ -162,13 +162,13 @@ public class DemoApplicationTests {
                 .withPayload(list)
                 .build();
 
-        Class<? extends Message> messageClass = message.getClass();
-
+        Class<? extends Map> mapClass = hashMap.getClass();
         Class<? extends List> listClass = list.getClass();
 
-        ParameterizedTypeImpl parameterizedType = ParameterizedTypeImpl.make(messageClass, new Type[]{listClass}, null);
+        ParameterizedTypeImpl mapParameterizedType = ParameterizedTypeImpl.make(mapClass, new Type[]{String.class, Object.class}, null);
+        ParameterizedTypeImpl listParameterizedType = ParameterizedTypeImpl.make(listClass, new Type[]{mapParameterizedType}, null);
 
-        Object o = smartMessageConverter.fromMessage(message, listClass, parameterizedType);
+        Object o = smartMessageConverter.fromMessage(message, listClass, listParameterizedType);
 
         assertThat(o).isNotNull();
         assertThat(o).isInstanceOf(List.class);
