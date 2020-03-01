@@ -2,7 +2,8 @@ buildscript {
     ext {
         springBootVersion = '2.2.1.RELEASE'
         dependencyManagementVersion = '1.0.8.RELEASE'
-        springCloudVersion = 'Hoxton.RELEASE'
+//        springCloudVersion = 'Hoxton.RELEASE' //BUG here! this spring cloud release contains SCS Horsham[3.0.0-RELEASE]
+        springCloudVersion = 'Hoxton.SR2' //Fix here! this spring cloud release contains SCS Horsham[3.0.2-RELEASE]
     }
     repositories {
         mavenCentral()

@@ -18,6 +18,11 @@ import java.util.function.Function;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
+/**
+ * This bug has been resolved as of spring-cloud-stream Horsham.SR2 (3.0.2-RELEASE):
+ *
+ * https://github.com/spring-cloud/spring-cloud-stream/milestone/70?closed=1
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ApplicationJsonMessageMarshallingConverterBugTest {
@@ -147,7 +152,7 @@ public class ApplicationJsonMessageMarshallingConverterBugTest {
      * SmartMessageConverter implementations should know how to convert the message but instead puts nulls in the list of maps
      *
      * ApplicationJsonMessageMarshallingConverter.convertFromInternal -> convertParameterizedType fails to convert the List<Map>
-     * It does not check that the target class is already the same as the payload class
+     * It is missing fallback case for when values in collection payload are not byte[] and not String
      */
     @Test
     public void testSmartMessageConverter_convertsMessageOfListOfMap_whenCalledWithNonNullConversionHint() {
